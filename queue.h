@@ -8,6 +8,7 @@
  * It uses a singly-linked list to represent the set of queue elements
  */
 
+#include <ctype.h>
 #include <stdbool.h>
 #include <stddef.h>
 
@@ -26,10 +27,8 @@ typedef struct ELE {
 /* Queue structure */
 typedef struct {
     list_ele_t *head; /* Linked list of elements */
-    /* TODO: You will need to add more fields to this structure
-     *        to efficiently implement q_size and q_insert_tail.
-     */
-    /* TODO: Remove the above comment when you are about to implement. */
+    list_ele_t *tail;
+    int size;
 } queue_t;
 
 /* Operations on queue */
@@ -95,5 +94,13 @@ void q_reverse(queue_t *q);
  * element, do nothing.
  */
 void q_sort(queue_t *q);
+
+list_ele_t *mergeSortList(list_ele_t *head);
+list_ele_t *merge(list_ele_t *ls1, list_ele_t *ls2);
+int strnatcmp(char const *st1, char const *st2);
+// static int compare_a(char const *st1, char const *st2);
+// static int compare_r(char const *st1, char const *st2);
+// static int compare_l(char const *st1, char const *st2);
+
 
 #endif /* LAB0_QUEUE_H */
