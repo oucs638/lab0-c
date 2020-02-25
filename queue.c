@@ -45,20 +45,18 @@ bool q_insert_head(queue_t *q, char *s)
     if (!q)
         return false;
     // make sure allocate the memory success
-    list_ele_t *newh;
-    newh = malloc(sizeof(list_ele_t));
+    list_ele_t *newh = malloc(sizeof(list_ele_t));
     if (!newh)
         return false;
-    char *tmp = NULL;
-    tmp = malloc((strlen(s) + 1) * sizeof(char));
-    if (!tmp) {
+    newh->value = malloc((strlen(s) + 1) * sizeof(char));
+    if (!newh->value) {
         free(newh);
         return false;
     }
     // copy the string
-    memset(tmp, 0, (strlen(s) + 1) * sizeof(char));
-    strncpy(tmp, s, strlen(s));
-    newh->value = tmp;
+    memset(newh->value, 0, (strlen(s) + 1) * sizeof(char));
+    strncpy(newh->value, s, strlen(s));
+    newh->value[strlen(s)] = '\0';
     // link newh
     newh->next = q->head;
     q->head = newh;
