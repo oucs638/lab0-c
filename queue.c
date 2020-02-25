@@ -104,7 +104,7 @@ bool q_insert_tail(queue_t *q, char *s)
     q->tail = newt;
     // refresh the size of queue
     q->size++;
-    return false;
+    return true;
 }
 
 /*
