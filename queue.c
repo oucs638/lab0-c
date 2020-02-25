@@ -115,8 +115,10 @@ bool q_remove_head(queue_t *q, char *sp, size_t bufsize)
 {
     if (!q || !q->head || !q->size)
         return false;
-    if (sp && q->head->value)
+    if (sp && q->head->value) {
+        memset(sp, '\0', bufsize);
         strncpy(sp, q->head->value, bufsize - 1);
+    }
     list_ele_t *tmp = q->head;
     q->head = q->head->next;
     free(tmp->value);
