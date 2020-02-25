@@ -79,22 +79,20 @@ bool q_insert_tail(queue_t *q, char *s)
     if (!q)
         return false;
     // make sure allocate the memory success
-    list_ele_t *newt = NULL;
-    newt = malloc(sizeof(list_ele_t));
+    list_ele_t *newt = malloc(sizeof(list_ele_t));
     if (!newt)
         return false;
-    char *tmp = NULL;
-    tmp = malloc((strlen(s) + 1) * sizeof(char));
-    if (!tmp) {
+    newt->value = malloc((strlen(s) + 1) * sizeof(char));
+    if (!newt->value) {
         free(newt);
         return false;
     }
     // copy the string
-    memset(tmp, 0, (strlen(s) + 1) * sizeof(char));
-    strncpy(tmp, s, strlen(s));
-    newt->value = tmp;
-    newt->next = NULL;
+    memset(newt->value, 0, (strlen(s) + 1) * sizeof(char));
+    strncpy(newt->value, s, strlen(s));
+    newt->value[strlen(s)] = '\0';
     // link newt
+    newt->next = NULL;
     if (!q->head)
         q->head = newt;
     else
