@@ -195,27 +195,22 @@ list_ele_t *mergeSortList(list_ele_t *head)
 
 list_ele_t *merge(list_ele_t *ls1, list_ele_t *ls2)
 {
-    list_ele_t *res = NULL, *lst = NULL;
-    while (ls1 || ls2) {
-        int tmp = 0;
-        if (ls1 && ls2)
-            tmp = (strnatcmp(ls1->value, ls2->value) < 0) ? 1 : -1;
-        if (!ls1 || tmp == -1) {
-            if (!res)
-                res = ls2;
-            else
-                lst->next = ls2;
-            lst = ls2;
-            ls2 = ls2->next;
-        } else if (!ls2 || tmp == 1) {
-            if (!res)
-                res = ls1;
-            else
-                lst->next = ls1;
-            lst = ls1;
+    list_ele_t *res = NULL;
+    list_ele_t **lst = &res;
+    while (ls1 && ls2) {
+        if (strnatcmp(ls1->value, ls2->value) < 0) {
+            *lst = ls1;
             ls1 = ls1->next;
+        } else {
+            *lst = ls2;
+            ls2 = ls2->next;
         }
+        lst = &((*lst)->next);
     }
+    if (ls1)
+        *lst = ls1;
+    if (ls2)
+        *lst = ls2;
     return res;
 }
 
